@@ -9,7 +9,7 @@ import { verifyToken } from "../../utils/verifyToken";
 
 
 const createBooking =catchAsync(async(req,res)=>{
-    console.log( 'createBooking',req.body);
+    // console.log( 'createBooking',req.body);
     const {refreshToken} =req.cookies
     const token = refreshToken?.split(' ')[1];
     if (!token) {
@@ -18,7 +18,7 @@ const createBooking =catchAsync(async(req,res)=>{
  
     // Verify the token
     const decoded = verifyToken(token);
-    console.log('de',decoded);
+    // console.log('de',decoded);
     
     const result = await bookingService.createBookingIntoDB(req.body,decoded);
     sendResponse(res,{
@@ -48,7 +48,7 @@ const{ query} = req.query
 
    // Verify the token
    const decoded = verifyToken(token);
-   console.log('de',decoded);
+//    console.log('de',decoded);
    
    
     const result = await bookingService.getAllUserBookingsFromDB(query,decoded,);

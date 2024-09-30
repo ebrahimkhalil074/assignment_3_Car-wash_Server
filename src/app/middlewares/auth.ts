@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 
@@ -9,10 +10,10 @@ import { verifyToken } from '../utils/verifyToken';
 import { JwtPayload } from 'jwt-decode';
 
 
-const auth = (...requiredRoles) => {
+const auth = (...requiredRoles:any) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization?.split(' ')[1];
-console.log("token",token);
+// console.log("token",token);
 
     // checking if the token is missing
     if (!token) {
@@ -22,8 +23,8 @@ console.log("token",token);
     // checking if the given token is valid
     const decoded = verifyToken(token);
 
-    const { role, email,} = decoded;
-    console.log(role,requiredRoles);
+    const { role, email,}:any = decoded;
+    // console.log(role,requiredRoles);
     
 
     // checking if the user is exist

@@ -11,20 +11,20 @@ import AppError from "../../errors/AppError";
 
 const  createBookingIntoDB = async(payload :TBooking,decoded:any)=>{
 
-console.log("payload booking",payload);
+// console.log("payload booking",payload);
 const user = await Useres.findOne({ email: decoded.email });
-console.log("user", user);
+// console.log("user", user);
  payload ={
   ...payload,
   customer: user!._id,
 }
-console.log(" add id payload booking",payload);
+// console.log(" add id payload booking",payload);
   const session = await mongoose.startSession();
 
   try {
     session.startTransaction();
 const avalevleSlot = await Slot.findById(payload.slotId)
-console.log(avalevleSlot);
+// console.log(avalevleSlot);
 if (avalevleSlot?.isBooked === 'booked') {
   throw new AppError(404,'slot not available');
 }
@@ -85,21 +85,21 @@ const getAllBookingsFromDB =async ()=>{
 const getAllUserBookingsFromDB = async (query: any, decoded: any) => {
   // Fetch user by email
   const user = await Useres.findOne({ email: decoded.email });
-  console.log("user", user);
+  // console.log("user", user);
   
   // If user not found, throw error
   if (!user) {
     throw new AppError(404, 'User not found');
   }
 
-  console.log("user ID", user._id);
+  // console.log("user ID", user._id);
 
   // Create the query using QueryBuilder
   const slotQuery = new QueryBuilder(
     booking.find({ customer: user._id })
       .populate('customer')
-      .populate('service')
-      .populate('slot'), 
+      .populate('serviceId')
+      .populate('slotId'), 
     query
   )
     .search(['name', 'email']) // You might need to adjust this based on the fields you are querying

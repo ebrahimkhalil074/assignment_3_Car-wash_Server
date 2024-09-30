@@ -13,17 +13,6 @@ router.post(
   AuthControllers.loginUser,
 );
 
-router.post(
-  '/change-password',
-  // auth(
-  //   USER_ROLE.superAdmin,
-  //   USER_ROLE.admin,
-  //   USER_ROLE.faculty,
-  //   USER_ROLE.student,
-  // ),
-  validateRequest(AuthValidation.changePasswordValidationSchema),
-  AuthControllers.changePassword,
-);
 
 router.post(
   '/refresh-token',
@@ -33,16 +22,8 @@ router.post(
 
 
 
-router.post(
-  '/forget-password',
-  validateRequest(AuthValidation.forgetPasswordValidationSchema),
-  AuthControllers.forgetPassword,
-);
 
-router.post(
-  '/reset-password',
-  validateRequest(AuthValidation.forgetPasswordValidationSchema),
-  AuthControllers.resetPassword,
-);
+
+
 
 export const AuthRoutes = router;

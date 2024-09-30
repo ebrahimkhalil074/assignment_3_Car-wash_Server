@@ -13,7 +13,7 @@ import config from '../config';
 import handleDuplicateError from '../errors/handleDuplicateError';
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
-  console.log(err.statusCode);
+  // console.log(err.statusCode);
   //setting default values
   let statusCode = 500;
   let message = 'Something went wrong!';
